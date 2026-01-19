@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/input.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logops1.svg') }}" type="image/x-icon">
+    <title>ERDV | Ayuda</title>
+</head>
+<body class="fondo text-white">
+    <!--Header: hay que crear formulario Login/Register para el boton "Acceder"-->
+    <header class="bg-[#222831]">
+        <nav class="tablet:flex pc:flex tv:flex items-center justify-between pc:mx-20 pc:py-4 tablet:mx-20 tablet:py-4 tv:mx-20 tv:py-1 celu:mx-4 celu:py-4">
+            <div class="flex justify-center celu:hidden">
+                <img class="celu:w-8 tablet:w-10 pc:w-12 tv:w-14" src="{{ url_for('static', filename='img/logops1.svg') }}" alt="El Rincon Del Vicio">
+            </div>
+            <div class="linkheader">
+                <ul class="tablet:flex pc:flex tv:flex celu:flex celu:justify-center celu:text-center celu:space-x-2 tablet:space-x-4 pc:space-x-6 celu:text-xs tv:text-xl tv:mx-20 tv:space-x-8">
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('index') }}"><li><b>INICIO</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('juegos') }}"><li><b>JUEGOS</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('noticias') }}"><li><b>NOTICIAS</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('ayuda') }}"><li><b>AYUDA</b></li></a>
+                </ul>
+            </div>
+            <div class="celu:mt-4 tablet:flex pc:flex tv:flex celu:flex celu:justify-center celu:space-x-2 celu:text-xs tablet:space-x-2 pc:space-x-4 tv:space-x-6 tv:text-xl tv:mb-6 mt-4">
+                <div id="authenticated" data-authenticated="{{ 'true' if current_user.is_authenticated else 'false' }}">
+                    <div id="boton-registro" style="display: {% if not authenticated %}block{% else %}none{% endif %};">
+                        <a class="inline-block border rounded-full p-1 bg-gray-500 hover:bg-orange-500 text-white" href="{{ url_for('show_signup_form') }}"><b>Registrarse</b></a>
+                    </div>                    
+                    <div id="boton-perfil" style="display: {% if current_user.is_authenticated %}block{% else %}none{% endif %};">
+                        <a href="{{ url_for('perfil') }}" class="border-black rounded-2xl p-1 bg-sky-600 hover:bg-sky-700 text-white">{{ current_user.name }}</a>
+                    </div>  
+                </div>                     
+            </div>
+        </nav>
+    </header>
+
+    <main class="text-black">
+        <h1 class="text-center text-2xl my-6 fuente3 text-orange-400 mt-16 mb-16">Soporte Tecnico</h1>
+        <div class="pc:mx-20 tablet:mx-20 tv:mx-20 celu:mx-4">
+            <h2 class="text-xl mb-6">● Preguntas Frecuentes FAQ :</h2>
+            <div class="faq">
+                <div class="pregunta border rounded-xl p-2 mb-4">
+                  <h2>● ¿Cuáles son los requisitos mínimos del sistema para ejecutar los emuladores?</h2>
+                  <div class="respuesta">
+                    <p class="text-orange-500">Respuesta a la pregunta 1</p>
+                  </div>
+                </div>
+                <div class="pregunta border rounded-xl p-2 mb-4">
+                  <h2>● ¿Cómo configuro un controlador para jugar en el emulador?</h2>
+                  <div class="respuesta">
+                    <p class="text-orange-500">Respuesta a la pregunta 2</p>
+                  </div>
+                </div>
+                <div class="pregunta border rounded-xl p-2 mb-4">
+                    <h2>● ¿Cuánto espacio en disco se requiere para descargar un juego de PS1?</h2>
+                    <div class="respuesta">
+                      <p class="text-orange-500">Respuesta a la pregunta 3</p>
+                    </div>
+                  </div>
+                  <div class="pregunta border rounded-xl p-2 mb-4">
+                    <h2>● ¿Cómo puedo cambiar mi contraseña de la cuenta en la página web?</h2>
+                    <div class="respuesta">
+                      <p class="text-orange-500">Respuesta a la pregunta 4</p>
+                    </div>
+                  </div>
+              </div>
+              
+        <h2 class="text-left text-1xl my-6 fuente3 text-black mt-10 mb-10">Configuración Estandar de PCSXR</h2>
+        <div class="mb-10 tablet:flex pc:flex tv:flex tablet:space-x-10 pc:space-x-10 celu:text-center">
+            <img class="border inline-block" width="50%" src="{{ url_for('static', filename='img/configEmulador.png') }}" alt=""><br><br>
+            <img class="border inline-block" width="50%" src="{{ url_for('static', filename='img/joystickConfig.png') }}" alt="">
+        </div>
+
+    
+
+        <div class="faq">
+            <div class="pregunta border rounded-xl p-2 mb-4">
+            <h2 class="text-lg mb-2">● Formulario de contacto con el soporte técnico</h2>
+            <div class="respuesta">
+            <div class="mt-10">
+                <form action="POST"">
+                    <label for="descripcion"></label>
+                    <textarea name="descripcion" id="descripcion" class="px-1 text-black" placeholder="Describa Su Problema..." cols="32" rows="3"></textarea><br><br>
+                    <label for="name"><b>Nombre&#160;</b></label>
+                    <input type="text" name="name" id="name" class="px-1 text-black" placeholder="Ingrese su nombre" required >
+                    <br><br>
+        
+                    <label for="email"><b>Correo@</b></label>
+                    <input type="text" name="email" id="email" class="px-1 text-black" placeholder="Ingrese su correo" required>                    
+                    <br><br>
+    
+                    <input class="border p-1 bg-gray-500" type="button" value="Enviar" onclick="validarContrasena(),validarEmail()">
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        
+    </main>
+
+    <footer class="bg-[#222831] px-2 celu:text-xs text-center">
+        <div class="mt-20 mb-2 flex justify-evenly pt-2">
+            <a href=""><p>Website Regulations</p></a>
+            <a href=""><p>Website rules</p></a>
+            <a href=""><p>Privacy Policy</p></a>
+        </div>
+        <div class="pb-4">
+            <p>© 2019-2024 ElRinconDelVicio - Download free games PC.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='Funciones js/acordion.js') }}"></script>
+
+    <script>
+        
+        var authenticated = document.getElementById('authenticated').getAttribute('data-authenticated');
+
+        // Oculta el botón de registro si el usuario está autenticado
+        if (authenticated === 'true') {
+           document.getElementById('boton-registro').style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>

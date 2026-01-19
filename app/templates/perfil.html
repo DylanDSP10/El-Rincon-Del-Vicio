@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/input.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logops1.svg') }}" type="image/x-icon">
+    <title>El rincon del vicio</title>
+</head>
+<body class="fondo text-white">
+    <!--Header-->
+    <header class="bg-[#222831]">
+        <nav class="tablet:flex pc:flex tv:flex items-center justify-between pc:mx-20 pc:py-4 tablet:mx-20 tablet:py-4 tv:mx-20 tv:py-1 celu:mx-4 celu:py-4">
+            <div class="flex justify-center celu:hidden">
+                <img class="celu:w-8 tablet:w-10 pc:w-12 tv:w-14" src="{{ url_for('static', filename='img/logops1.svg') }}" alt="El Rincon Del Vicio">
+            </div>
+            <div class="linkheader">
+                <ul class="tablet:flex pc:flex tv:flex celu:flex celu:justify-center celu:text-center celu:space-x-2 tablet:space-x-4 pc:space-x-6 celu:text-xs tv:text-xl tv:mx-20 tv:space-x-8">
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('index') }}"><li><b>INICIO</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('juegos') }}"><li><b>JUEGOS</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('noticias') }}"><li><b>NOTICIAS</b></li></a>
+                    <a class="link rounded-2xl hover:text-white border p-2 animacionZoom text-white text-decoration-none" href="{{ url_for('ayuda') }}"><li><b>AYUDA</b></li></a>
+                </ul>
+            </div>
+            <div class="celu:mt-4 tablet:flex pc:flex tv:flex celu:flex celu:justify-center celu:space-x-2 celu:text-xs tablet:space-x-2 pc:space-x-4 tv:space-x-6 tv:text-xl tv:mb-6 mt-4">
+                <div id="authenticated" data-authenticated="{{ 'true' if current_user.is_authenticated else 'false' }}">
+                    <div id="boton-registro" style="display: {% if not authenticated %}block{% else %}none{% endif %};">
+                        <a class="inline-block border rounded-full p-1 bg-gray-500 hover:bg-orange-500 text-white" href="{{ url_for('show_signup_form') }}"><b>Registrarse</b></a>
+                    </div>                    
+                    <div id="boton-perfil" style="display: {% if current_user.is_authenticated %}block{% else %}none{% endif %};">
+                        <a href="{{ url_for('perfil') }}" class="border-black rounded-2xl p-1 bg-sky-600 hover:bg-sky-700 text-white">{{ current_user.name }}</a>
+                    </div>  
+                </div>                     
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-20 text-center">
+        <div>
+            <h1 class="text-2xl mb-10 font-bold text-black">Bienvenido a tu perfil, <span class="text-orange-500">{{ current_user.name }}</span></h1>
+            
+            <div class="bg-slate-800 bg-opacity-30 mx-80 celu:mx-10 tablet:mx-40">
+                <h2 class="text-xl font-bold mb-10 pt-10">Información de Usuario:</h2>
+                <div class="mt-10">
+                    
+
+                </div>
+                <p class="text-xl mt-10"><strong>Nombre:</strong> {{ current_user.name }}</p>
+                <p class="text-xl pb-10"><strong>Correo Electrónico:</strong> {{ current_user.email }}</p>
+            </div>
+        
+            <!-- Botónes: Cerrar sesion y eliminar cuenta -->
+            <div class="flex justify-center items-center space-x-4">
+                <div class="mt-10 mb-20">
+                    <a class="btn btn-secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                </div>
+    
+                <div class="mt-10 mb-20">
+                    <form action="{{ url_for('eliminar_usuario', user_id=current_user.id) }}" method="post">
+                        <button type="submit" class="btn btn-danger">Eliminar Cuenta</button>
+                    </form>
+                </div>  
+            </div>
+          
+        </div>    
+    </main>
+
+    <section>
+        {% if current_user.is_admin %}
+        <div class="mt-10 mb-10 flex justify-center items-center">        
+            <div class="bg-opacity-50 flex justify-center items-center">
+                <div class="bg-gray-500 rounded-2xl shadow-xl px-40">
+                    <div class="p-8">
+                        <form action="{{ url_for('subir_juego') }}" method="POST">
+                            <h2 class="text-2xl text-white font-bold text-center mb-16"><u>Agregar Juegos</u></h2>
+                            <div class="mb-6">
+                                <label for="nombre" class="block text-sm font-medium text-white mb-2">Nombre del Juego</label>
+                                <input type="text" class="input px-10 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-black" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="url_imagen" class="block text-sm font-medium  text-white mb-2">URL Imagen</label>
+                                <input type="url" class="input px-10 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300  text-black" id="url_imagen" name="url_imagen" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="descripcion" class="block text-sm font-medium  text-white mb-2">Descripción</label>
+                                <textarea class="input px-10 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 resize-none  text-black" id="descripcion" name="descripcion" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-6">
+                                <label for="url_descarga" class="block text-sm font-medium  text-white mb-2">URL de Descarga</label>
+                                <input type="url" class="input px-10 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300  text-black" id="url_descarga" name="url_descarga" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="genero" class="block text-sm font-medium text-white mb-2">Género</label>
+                                <input type="text" class="input px-10 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300  text-black" id="genero" name="genero" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="lanzamiento" class="block text-sm font-medium text-white mb-2">Fecha de Lanzamiento</label>
+                                <input type="date" class="input px-16 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300  text-black" id="lanzamiento" name="lanzamiento" required>
+                            </div>
+                            <div class="flex justify-center">
+                                <button class="hover:bg-orange-500 p-2 border bg-slate-800 rounded-lg px-10 py-2" type="submit" >Subir Juego</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+    
+    <script>
+        // esto oculta el botón de registro si el usuario está autenticado
+        var authenticated = document.getElementById('authenticated').getAttribute('data-authenticated');
+        if (authenticated === 'true') {
+            document.getElementById('boton-registro').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+         document.getElementById('browse_button').addEventListener('click', function () {
+        document.getElementById('profile_image').click();
+        });
+    });
+
+    </script>
+</body>
+</html>
+
+

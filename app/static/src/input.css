@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    background-image: url("/src/img/fondoJuegos3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(1px);
+    padding: 0;
+    margin: 0;
+}
+
+.fondo {
+  background-image: radial-gradient(circle at 37.72% -19.64%, #e5e6ef 0, #dfe0e3 25%, #d9d9d8 50%, #d2d3cd 75%, #cbcdc3 100%);
+}
+    
+
+.bgInicio {
+  background: #222831;
+}
+.bg-login_register{
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/934/596/846/abstracto-naranja-textura-wallpaper-preview.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.linkheader {
+  margin-top: 12px;
+}
+
+.link:hover{
+  background-color: orange
+}
+/*CODIGO DE DYLAN*/
+.animacionjuego:hover{
+  opacity: 0.1;
+  background-color: gray;
+}
+/*CODIGO DE DYLAN*/
+
+
+/*Fuente que usamos para los textos pequeños*/
+.fuente1 {
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+/*Fuente rara, usar poco*/
+.fuente2 {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*Fuente que usamos para los textos grandes*/
+.fuente3{
+  font-family: "Rubik Mono One", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+/*------------------------------------------*/
+
+
+
+
+/*Efecto zoom cuando pasas el mouse por un link*/
+/*---------------------------------------------*/
+
+.btnOrange:hover{
+  background-color: orange;
+  color: white;
+}
+
+
+/*estilos para Preguntas y respuestas en la seccion ayuda*/
+.faq .respuesta {
+  display: none;
+}
+
+.faq .pregunta h2 {
+  cursor: pointer;
+}
+
+.faq .pregunta.active .respuesta {
+  display: block;
+}
+
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.animacionZoom:hover{
+  transform: scale(1.1);
+  color: #F97316;
+} /*Funciona en el header*/
+
+.user-info {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-info li {
+  display: inline-block;
+  margin: 0;
+  padding: 0 10px 0 0;
+}
+
+@media (min-width: 100px) {
+  .imgInicio { width: 100%; height: 400px; }
+
+  }
+
+
+@media (min-width: 640px) {
+  .imgInicio { width: 100%; height: 600px; }
+  .juegoInicio{
+    width: 400px;
+  }
+ }
+ 
+
+
+@media (min-width: 1024px) {
+  .imgInicio { width: 100%; height: 600px; }
+  .juegoInicio{
+    width: 500px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .imgInicio { width: 100%; height: 700px; }
+  .juegoInicio{
+    width: 500px;
+  }
+}
